@@ -273,7 +273,13 @@ function updateStatistics() {
         { year: 2005, participation: 69.34 },
         { year: 2000, participation: 30.19 },
         { year: 1992, participation: 69.70 },
-        { year: 1988, participation: 36.88 }
+        { year: 1988, participation: 36.88 },
+        { year: 1972, participation: 39.49 },
+        { year: 1969, participation: 80.13 },
+        { year: 1962, participation: 76.99 }, // octobre
+        { year: 1962, participation: 75.59 }, // avril
+        { year: 1961, participation: 76.39 },
+        { year: 1958, participation: 84.93 }
     ];
     
     const totalReferendums = referendums.length;
