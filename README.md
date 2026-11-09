@@ -1,45 +1,26 @@
-# 🗳️ Depuis Quand ? 
+# L'Urne Vide
 
-## 🎯 Aperçu
+Compteur du temps écoulé depuis le dernier référendum national en France (29 mai 2005), avec la chronologie des dix référendums de la Ve République.
 
-**Depuis Quand ?** est un projet citoyen qui met en lumière le temps écoulé depuis le dernier référendum national français (29 mai 2005) et présente une chronologie détaillée des référendums de la Ve République.
+Site statique : HTML, CSS et JavaScript, sans framework ni étape de build.
 
-- 🌐 [Site en ligne]
-- 🐦 [Twitter Bot](https://twitter.com/BOTDepuisQuand)
-
-## ✨ Fonctionnalités
-
-### 🕐 Compteur en temps réel
-- Calcul du temps écoulé depuis le dernier référendum
-- Affichage en années, mois, jours et total de jours
-- Mise à jour automatique
-
-### 📜 Chronologie interactive
-- Timeline verticale élégante avec animations
-- Les derniers référendums nationaux documentés
-- Visualisation des résultats avec barres proportionnelles
-- Descriptions de chaque référendum
-
-
-3. **Accéder au site**
-```
+## Structure
 
 ```
-
-
-### Modifier le compteur
-
-Dans `js/script.js`, ligne 18 :
-
-```javascript
-const CONFIG = {
-    referendumDate: new Date(2005, 4, 29), // Format: (année, mois-1, jour)
-    // ...
-};
+index.html        page unique
+css/style.css     charte « L'Affiche » (rouge #E4002B, noir, blanc ; Big Shoulders Display + Archivo)
+js/main.js        données des référendums, compteur, chronologie, chiffres
+assets/favicon.svg
 ```
 
-### Ajout de données
-Pour ajouter de nouvelles données statistiques, modifiez la fonction `updateStatistics()` dans `js/main.js`.
+## Ajouter un référendum
 
-D'autres fonctionnalité sont à ajouter (ajout de réréférendums)
+Dans `js/main.js`, ajouter une entrée **en tête** du tableau `REFERENDUMS` (le plus récent en premier). Le compteur, la chronologie et les chiffres se mettent à jour tout seuls.
 
+## Voir le site en local
+
+Ouvrir `index.html` dans un navigateur.
+
+## Mise en ligne
+
+GitHub Pages : Settings → Pages → Source « Deploy from a branch » → `main` / racine.

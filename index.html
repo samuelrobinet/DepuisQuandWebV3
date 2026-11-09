@@ -1,742 +1,106 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Suivi du temps écoulé depuis le dernier référendum national en France">
-    <meta name="author" content="DepuisQuand">
-    <title>Depuis quand ? - Référendums en France</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/img/elections-icon.png">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    
-    <!-- Custom CSS -->
-    <link href="css/styles.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>L'Urne Vide — jours sans référendum national</title>
+  <meta name="description" content="Compteur du temps écoulé depuis le dernier référendum national en France (29 mai 2005) et chronologie des référendums de la Ve République.">
+  <meta property="og:title" content="L'Urne Vide">
+  <meta property="og:description" content="Depuis le 29 mai 2005, aucun référendum national en France. On compte les jours.">
+  <meta name="theme-color" content="#E4002B">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Archivo:wght@400;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand" href="#accueil">
-                <i class="fas fa-vote-yea me-2"></i>Depuis Quand ?
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#accueil">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#chronologie">Chronologie</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#statistiques">Statistiques</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://twitter.com/BOTDepuisQuand" target="_blank">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+
+<header class="topbar">
+  <div class="wrap topbar__inner">
+    <a class="brand" href="#compteur" aria-label="L'Urne Vide, retour au compteur">
+      <svg class="brand__mark" viewBox="0 0 44 44" aria-hidden="true"><path d="M5 14h13v4h8v-4h13v27H5z"/><rect x="15" y="5" width="14" height="4"/></svg>
+      <span>L'Urne Vide</span>
+    </a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Ouvrir le menu">
+      <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M3 7h22M3 14h22M3 21h22"/></svg>
+    </button>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="#compteur">Compteur</a>
+      <a href="#chronologie">Chronologie</a>
+      <a href="#chiffres">Chiffres</a>
+      <a href="#apropos">À propos</a>
+      <a class="nav__social" href="https://x.com/UrneVide" target="_blank" rel="noopener" aria-label="L'Urne Vide sur X">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23 22h-6.2l-4.8-6.3L6.4 22H3.3l7.3-8.3L1 2h6.3l4.4 5.8L18.9 2zm-1.1 18h1.7L6.3 3.9H4.5L17.8 20z"/></svg>
+      </a>
     </nav>
+  </div>
+</header>
 
-    <!-- Hero Section -->
-    <header class="hero-section" id="accueil">
-        <div class="hero-overlay"></div>
-        <div class="container position-relative">
-            <div class="row justify-content-center text-center">
-                <div class="col-lg-10">
-                    <div class="hero-icon mb-4" data-aos="zoom-in">
-                        <i class="fas fa-vote-yea"></i>
-                    </div>
-                    <h1 class="display-3 fw-bold mb-4" data-aos="fade-up">
-                        Depuis quand ? 🤔🗳️
-                    </h1>
-                    <p class="lead mb-5" data-aos="fade-up" data-aos-delay="100">
-                        Depuis quand le peuple français n'a pas été consulté par un référendum national ?
-                    </p>
-                    
-                    <div class="time-counter" data-aos="fade-up" data-aos-delay="200">
-                        <div class="counter-card">
-                            <h2 class="counter-title mb-3">Dernier référendum</h2>
-                            <div class="counter-date mb-4">
-                                <i class="fas fa-calendar-alt me-2"></i>29 mai 2005
-                            </div>
-                            <div class="counter-value" id="timeSince">
-                                <div class="spinner-border text-light" role="status">
-                                    <span class="visually-hidden">Chargement...</span>
-                                </div>
-                            </div>
-                            <div class="counter-details mt-3" id="timeDetails"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+<main>
+  <section id="compteur" class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Compteur en direct</p>
+      <p class="hero__days" id="days" aria-live="polite">7 834</p>
+      <h1 class="hero__title">jours sans<br>référendum.</h1>
+      <dl class="breakdown" aria-label="Durée détaillée">
+        <div><dt>ans</dt><dd id="years">21</dd></div>
+        <div><dt>mois</dt><dd id="months">5</dd></div>
+        <div><dt>jours</dt><dd id="rest">11</dd></div>
+      </dl>
+    </div>
+  </section>
 
-    <!-- Timeline Section -->
-    <section class="py-5 bg-light" id="chronologie">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h2 class="section-title mb-3" data-aos="fade-up">
-                        <i class="fas fa-history me-2"></i>Chronologie des Référendums
-                    </h2>
-                    <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
-                        Découvrez l'historique des référendums nationaux organisés en France sous la Ve République
-                    </p>
-                </div>
-            </div>
+  <section class="statement">
+    <div class="wrap statement__inner">
+      <p class="statement__text">La dernière fois qu'on nous a demandé notre avis, c'était le 29&nbsp;mai&nbsp;2005.</p>
+      <p class="stamp">Non<br>54,67&nbsp;%</p>
+    </div>
+  </section>
 
-            <div class="timeline">
-<!-- Référendum 2005 -->
-                <div class="timeline-item" data-aos="fade-right">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="card shadow-sm border-0 border-start border-danger border-4">
-                            <div class="card-body p-4">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <span class="badge bg-primary">29 mai 2005</span>
-                                    <span class="badge bg-danger"><i class="fas fa-times-circle me-1"></i>REJETÉ</span>
-                                </div>
-                                <h4 class="card-title mb-3">Traité établissant une Constitution pour l'Europe</h4>
-                                
-                                <div class="mb-3">
-                                    <p class="mb-1"><strong><i class="fas fa-user-tie me-2"></i>Président :</strong> Jacques Chirac</p>
-                                    <p class="mb-0"><strong><i class="fas fa-briefcase me-2"></i>Premier ministre :</strong> Jean-Pierre Raffarin</p>
-                                </div>
-                                
-                                <p class="card-text text-muted mb-4">
-                                    Les Français ont été appelés à se prononcer sur la ratification du traité établissant une constitution européenne. Ce texte visait à remplacer les traités existants et à doter l'Union européenne d'institutions plus efficaces. Le "Non" l'a emporté, marquant un tournant dans la construction européenne.
-                                </p>
-                                
-                                <div class="results-section">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span class="fw-bold text-danger"><i class="fas fa-times-circle"></i> Non: 54.67%</span>
-                                        <span class="fw-bold text-success"><i class="fas fa-check-circle"></i> Oui: 45.33%</span>
-                                    </div>
-                                    <div class="progress" style="height: 40px;">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 54.67%;" aria-valuenow="54.67" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Non 54.67%</span>
-                                        </div>
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 45.33%;" aria-valuenow="45.33" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Oui 45.33%</span>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3 d-flex justify-content-between text-muted small">
-                                        <span><i class="fas fa-users me-1"></i>Participation: 69.34%</span>
-                                        <span><i class="fas fa-ban me-1"></i>Blancs/Nuls: 3.82%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="mt-3 d-flex gap-2">
-                                    <a href="https://fr.wikipedia.org/wiki/R%C3%A9f%C3%A9rendum_fran%C3%A7ais_sur_le_trait%C3%A9_%C3%A9tablissant_une_Constitution_pour_l%27Europe" target="_blank" class="btn btn-sm btn-outline-primary">
-                                        <i class="fab fa-wikipedia-w me-1"></i>Wikipedia
-                                    </a>
-                                    <a href="https://www.conseil-constitutionnel.fr/les-decisions/referendum-du-29-mai-2005" target="_blank" class="btn btn-sm btn-outline-secondary">
-                                        <i class="fas fa-external-link-alt me-1"></i>Résultats officiels
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <section id="chronologie" class="section">
+    <div class="wrap">
+      <h2 class="section__title">Chronologie</h2>
+      <p class="section__lead">Les dix référendums nationaux de la Ve République, du plus récent au plus ancien.</p>
+      <ol class="timeline" id="timeline"></ol>
+    </div>
+  </section>
 
-                <!-- Référendum 2000 -->
-                <div class="timeline-item" data-aos="fade-left">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="card shadow-sm border-0 border-start border-success border-4">
-                            <div class="card-body p-4">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <span class="badge bg-primary">24 septembre 2000</span>
-                                    <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>ADOPTÉ</span>
-                                </div>
-                                <h4 class="card-title mb-3">Quinquennat présidentiel</h4>
-                                
-                                <div class="mb-3">
-                                    <p class="mb-1"><strong><i class="fas fa-user-tie me-2"></i>Président :</strong> Jacques Chirac</p>
-                                    <p class="mb-0"><strong><i class="fas fa-briefcase me-2"></i>Premier ministre :</strong> Lionel Jospin</p>
-                                </div>
-                                
-                                <p class="card-text text-muted mb-4">
-                                    Ce référendum proposait de réduire le mandat présidentiel de 7 ans (septennat) à 5 ans (quinquennat). L'objectif était d'aligner la durée du mandat présidentiel sur celle de l'Assemblée nationale pour éviter les cohabitations. Le "Oui" l'a emporté malgré une forte abstention.
-                                </p>
-                                
-                                <div class="results-section">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span class="fw-bold text-success"><i class="fas fa-check-circle"></i> Oui: 73.21%</span>
-                                        <span class="fw-bold text-danger"><i class="fas fa-times-circle"></i> Non: 26.79%</span>
-                                    </div>
-                                    <div class="progress" style="height: 40px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 73.21%;" aria-valuenow="73.21" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Oui 73.21%</span>
-                                        </div>
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 26.79%;" aria-valuenow="26.79" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Non 26.79%</span>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3 d-flex justify-content-between text-muted small">
-                                        <span><i class="fas fa-users me-1"></i>Participation: 30.19%</span>
-                                        <span><i class="fas fa-ban me-1"></i>Blancs/Nuls: 5.83%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="mt-3 d-flex gap-2">
-                                    <a href="https://fr.wikipedia.org/wiki/R%C3%A9f%C3%A9rendum_fran%C3%A7ais_sur_le_quinquennat_pr%C3%A9sidentiel" target="_blank" class="btn btn-sm btn-outline-primary">
-                                        <i class="fab fa-wikipedia-w me-1"></i>Wikipedia
-                                    </a>
-                                    <a href="https://www.conseil-constitutionnel.fr/les-decisions/referendum-du-24-septembre-2000" target="_blank" class="btn btn-sm btn-outline-secondary">
-                                        <i class="fas fa-external-link-alt me-1"></i>Résultats officiels
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <section id="chiffres" class="section section--dark">
+    <div class="wrap">
+      <h2 class="section__title">Chiffres</h2>
+      <div class="stats">
+        <div class="stat"><p class="stat__num" id="statCount">10</p><p class="stat__label">référendums depuis 1958</p></div>
+        <div class="stat"><p class="stat__num" id="statDays">7 834</p><p class="stat__label">jours depuis le dernier</p></div>
+        <div class="stat"><p class="stat__num" id="statTurnout">64,0&nbsp;%</p><p class="stat__label">participation moyenne</p></div>
+        <div class="stat"><p class="stat__num" id="statGap">16 ans</p><p class="stat__label">le plus long silence avant 2005 (1972&nbsp;→&nbsp;1988)</p></div>
+      </div>
+    </div>
+  </section>
 
-                <!-- Référendum 1992 -->
-                <div class="timeline-item" data-aos="fade-right">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="card shadow-sm border-0 border-start border-success border-4">
-                            <div class="card-body p-4">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <span class="badge bg-primary">20 septembre 1992</span>
-                                    <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>ADOPTÉ</span>
-                                </div>
-                                <h4 class="card-title mb-3">Traité de Maastricht</h4>
-                                
-                                <div class="mb-3">
-                                    <p class="mb-1"><strong><i class="fas fa-user-tie me-2"></i>Président :</strong> François Mitterrand</p>
-                                    <p class="mb-0"><strong><i class="fas fa-briefcase me-2"></i>Premier ministre :</strong> Pierre Bérégovoy</p>
-                                </div>
-                                
-                                <p class="card-text text-muted mb-4">
-                                    Les Français se sont prononcés sur la ratification du traité de Maastricht, qui créait l'Union européenne et posait les bases de la monnaie unique (l'euro). Avec une courte majorité, le "Oui" l'a emporté, permettant à la France de poursuivre l'aventure européenne et d'adopter l'euro en 2002.
-                                </p>
-                                
-                                <div class="results-section">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span class="fw-bold text-success"><i class="fas fa-check-circle"></i> Oui: 51.05%</span>
-                                        <span class="fw-bold text-danger"><i class="fas fa-times-circle"></i> Non: 48.95%</span>
-                                    </div>
-                                    <div class="progress" style="height: 40px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 51.05%;" aria-valuenow="51.05" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Oui 51.05%</span>
-                                        </div>
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 48.95%;" aria-valuenow="48.95" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Non 48.95%</span>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3 d-flex justify-content-between text-muted small">
-                                        <span><i class="fas fa-users me-1"></i>Participation: 69.70%</span>
-                                        <span><i class="fas fa-ban me-1"></i>Blancs/Nuls: 2.79%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="mt-3 d-flex gap-2">
-                                    <a href="https://fr.wikipedia.org/wiki/R%C3%A9f%C3%A9rendum_fran%C3%A7ais_sur_le_trait%C3%A9_de_Maastricht" target="_blank" class="btn btn-sm btn-outline-primary">
-                                        <i class="fab fa-wikipedia-w me-1"></i>Wikipedia
-                                    </a>
-                                    <a href="https://www.conseil-constitutionnel.fr/les-decisions/referendum-du-20-septembre-1992" target="_blank" class="btn btn-sm btn-outline-secondary">
-                                        <i class="fas fa-external-link-alt me-1"></i>Résultats officiels
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <section id="apropos" class="section">
+    <div class="wrap about">
+      <h2 class="section__title">À propos</h2>
+      <p>L'Urne Vide est un projet citoyen et indépendant. Il compte le temps écoulé depuis le dernier référendum national en France et rappelle l'histoire des consultations de la Ve République.</p>
+      <p>Les résultats sont ceux proclamés par le Conseil constitutionnel. Une erreur&nbsp;? Un référendum annoncé&nbsp;? Écrivez-nous sur X.</p>
+    </div>
+  </section>
+</main>
 
-                <!-- Référendum 1988 -->
-                <div class="timeline-item" data-aos="fade-left">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="card shadow-sm border-0 border-start border-success border-4">
-                            <div class="card-body p-4">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <span class="badge bg-primary">6 novembre 1988</span>
-                                    <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>ADOPTÉ</span>
-                                </div>
-                                <h4 class="card-title mb-3">Statut de la Nouvelle-Calédonie</h4>
-                                
-                                <div class="mb-3">
-                                    <p class="mb-1"><strong><i class="fas fa-user-tie me-2"></i>Président :</strong> François Mitterrand</p>
-                                    <p class="mb-0"><strong><i class="fas fa-briefcase me-2"></i>Premier ministre :</strong> Michel Rocard</p>
-                                </div>
-                                
-                                <p class="card-text text-muted mb-4">
-                                    Ce référendum portait sur l'approbation des accords de Matignon concernant le statut de la Nouvelle-Calédonie. Ces accords prévoyaient une période de transition de 10 ans avant un vote d'autodétermination. Le "Oui" l'a largement emporté, ouvrant la voie à une plus grande autonomie du territoire.
-                                </p>
-                                
-                                <div class="results-section">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span class="fw-bold text-success"><i class="fas fa-check-circle"></i> Oui: 79.99%</span>
-                                        <span class="fw-bold text-danger"><i class="fas fa-times-circle"></i> Non: 20.01%</span>
-                                    </div>
-                                    <div class="progress" style="height: 40px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 79.99%;" aria-valuenow="79.99" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Oui 79.99%</span>
-                                        </div>
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 20.01%;" aria-valuenow="20.01" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Non 20.01%</span>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3 d-flex justify-content-between text-muted small">
-                                        <span><i class="fas fa-users me-1"></i>Participation: 36.88%</span>
-                                        <span><i class="fas fa-ban me-1"></i>Blancs/Nuls: 6.59%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="mt-3 d-flex gap-2">
-                                    <a href="https://fr.wikipedia.org/wiki/R%C3%A9f%C3%A9rendum_fran%C3%A7ais_sur_les_accords_de_Matignon" target="_blank" class="btn btn-sm btn-outline-primary">
-                                        <i class="fab fa-wikipedia-w me-1"></i>Wikipedia
-                                    </a>
-                                    <a href="https://www.conseil-constitutionnel.fr/les-decisions/referendum-du-6-novembre-1988" target="_blank" class="btn btn-sm btn-outline-secondary">
-                                        <i class="fas fa-external-link-alt me-1"></i>Résultats officiels
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div>
+      <p class="footer__brand">L'Urne Vide</p>
+      <p class="footer__small">Projet citoyen, sans affiliation politique.</p>
+    </div>
+    <ul class="footer__links">
+      <li><a href="https://x.com/UrneVide" target="_blank" rel="noopener">X · @UrneVide</a></li>
+      <li><a href="https://www.conseil-constitutionnel.fr/" target="_blank" rel="noopener">Conseil constitutionnel</a></li>
+      <li><a href="https://www.vie-publique.fr/" target="_blank" rel="noopener">Vie publique</a></li>
+    </ul>
+  </div>
+</footer>
 
-                <!-- Référendum 1972 -->
-                <div class="timeline-item" data-aos="fade-right">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="card shadow-sm border-0 border-start border-success border-4">
-                            <div class="card-body p-4">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <span class="badge bg-primary">23 avril 1972</span>
-                                    <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>ADOPTÉ</span>
-                                </div>
-                                <h4 class="card-title mb-3">Élargissement de la Communauté européenne</h4>
-                                
-                                <div class="mb-3">
-                                    <p class="mb-1"><strong><i class="fas fa-user-tie me-2"></i>Président :</strong> Georges Pompidou</p>
-                                    <p class="mb-0"><strong><i class="fas fa-briefcase me-2"></i>Premier ministre :</strong> Jacques Chaban-Delmas</p>
-                                </div>
-                                
-                                <p class="card-text text-muted mb-4">
-                                    Les Français ont été consultés sur l'élargissement de la Communauté européenne au Royaume-Uni, à l'Irlande, au Danemark et à la Norvège. Malgré une abstention importante, le "Oui" l'a emporté largement, confirmant l'engagement européen de la France sous la présidence de Georges Pompidou.
-                                </p>
-                                
-                                <div class="results-section">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span class="fw-bold text-success"><i class="fas fa-check-circle"></i> Oui: 68.32%</span>
-                                        <span class="fw-bold text-danger"><i class="fas fa-times-circle"></i> Non: 31.68%</span>
-                                    </div>
-                                    <div class="progress" style="height: 40px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 68.32%;" aria-valuenow="68.32" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Oui 68.32%</span>
-                                        </div>
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 31.68%;" aria-valuenow="31.68" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Non 31.68%</span>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3 d-flex justify-content-between text-muted small">
-                                        <span><i class="fas fa-users me-1"></i>Participation: 39.49%</span>
-                                        <span><i class="fas fa-ban me-1"></i>Blancs/Nuls: 7.11%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="mt-3 d-flex gap-2">
-                                    <a href="https://fr.wikipedia.org/wiki/R%C3%A9f%C3%A9rendum_fran%C3%A7ais_sur_l%27%C3%A9largissement_de_la_Communaut%C3%A9_%C3%A9conomique_europ%C3%A9enne" target="_blank" class="btn btn-sm btn-outline-primary">
-                                        <i class="fab fa-wikipedia-w me-1"></i>Wikipedia
-                                    </a>
-                                    <a href="https://www.conseil-constitutionnel.fr/les-decisions/referendum-du-23-avril-1972" target="_blank" class="btn btn-sm btn-outline-secondary">
-                                        <i class="fas fa-external-link-alt me-1"></i>Résultats officiels
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Référendum 1969 -->
-                <div class="timeline-item" data-aos="fade-left">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="card shadow-sm border-0 border-start border-danger border-4">
-                            <div class="card-body p-4">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <span class="badge bg-primary">27 avril 1969</span>
-                                    <span class="badge bg-danger"><i class="fas fa-times-circle me-1"></i>REJETÉ</span>
-                                </div>
-                                <h4 class="card-title mb-3">Régionalisation et réforme du Sénat</h4>
-                                
-                                <div class="mb-3">
-                                    <p class="mb-1"><strong><i class="fas fa-user-tie me-2"></i>Président :</strong> Charles de Gaulle</p>
-                                    <p class="mb-0"><strong><i class="fas fa-briefcase me-2"></i>Premier ministre :</strong> Maurice Couve de Murville</p>
-                                </div>
-                                
-                                <p class="card-text text-muted mb-4">
-                                    Le général de Gaulle proposait une réforme du Sénat et la création de régions. Face au "Non" l'emportant, de Gaulle a démissionné de la présidence de la République le lendemain, comme il l'avait annoncé. Ce référendum marque la fin de son mandat et un tournant politique majeur.
-                                </p>
-                                
-                                <div class="results-section">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span class="fw-bold text-danger"><i class="fas fa-times-circle"></i> Non: 52.41%</span>
-                                        <span class="fw-bold text-success"><i class="fas fa-check-circle"></i> Oui: 47.59%</span>
-                                    </div>
-                                    <div class="progress" style="height: 40px;">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 52.41%;" aria-valuenow="52.41" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Non 52.41%</span>
-                                        </div>
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 47.59%;" aria-valuenow="47.59" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Oui 47.59%</span>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3 d-flex justify-content-between text-muted small">
-                                        <span><i class="fas fa-users me-1"></i>Participation: 80.13%</span>
-                                        <span><i class="fas fa-ban me-1"></i>Blancs/Nuls: 5.84%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="mt-3 d-flex gap-2">
-                                    <a href="https://fr.wikipedia.org/wiki/R%C3%A9f%C3%A9rendum_fran%C3%A7ais_de_1969" target="_blank" class="btn btn-sm btn-outline-primary">
-                                        <i class="fab fa-wikipedia-w me-1"></i>Wikipedia
-                                    </a>
-                                    <a href="https://www.conseil-constitutionnel.fr/les-decisions/referendum-du-27-avril-1969" target="_blank" class="btn btn-sm btn-outline-secondary">
-                                        <i class="fas fa-external-link-alt me-1"></i>Résultats officiels
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Référendum 1962 (octobre) -->
-                <div class="timeline-item" data-aos="fade-right">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="card shadow-sm border-0 border-start border-success border-4">
-                            <div class="card-body p-4">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <span class="badge bg-primary">28 octobre 1962</span>
-                                    <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>ADOPTÉ</span>
-                                </div>
-                                <h4 class="card-title mb-3">Élection du président au suffrage universel direct</h4>
-                                
-                                <div class="mb-3">
-                                    <p class="mb-1"><strong><i class="fas fa-user-tie me-2"></i>Président :</strong> Charles de Gaulle</p>
-                                    <p class="mb-0"><strong><i class="fas fa-briefcase me-2"></i>Premier ministre :</strong> Georges Pompidou</p>
-                                </div>
-                                
-                                <p class="card-text text-muted mb-4">
-                                    Le général de Gaulle proposait que le président de la République soit élu au suffrage universel direct et non plus par un collège électoral. Cette réforme majeure, approuvée par 62% des votants, a profondément modifié les institutions de la Ve République et renforcé le rôle présidentiel.
-                                </p>
-                                
-                                <div class="results-section">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span class="fw-bold text-success"><i class="fas fa-check-circle"></i> Oui: 62.25%</span>
-                                        <span class="fw-bold text-danger"><i class="fas fa-times-circle"></i> Non: 37.75%</span>
-                                    </div>
-                                    <div class="progress" style="height: 40px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 62.25%;" aria-valuenow="62.25" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Oui 62.25%</span>
-                                        </div>
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 37.75%;" aria-valuenow="37.75" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Non 37.75%</span>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3 d-flex justify-content-between text-muted small">
-                                        <span><i class="fas fa-users me-1"></i>Participation: 76.99%</span>
-                                        <span><i class="fas fa-ban me-1"></i>Blancs/Nuls: 6.28%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="mt-3 d-flex gap-2">
-                                    <a href="https://fr.wikipedia.org/wiki/R%C3%A9f%C3%A9rendum_fran%C3%A7ais_de_1962" target="_blank" class="btn btn-sm btn-outline-primary">
-                                        <i class="fab fa-wikipedia-w me-1"></i>Wikipedia
-                                    </a>
-                                    <a href="https://www.conseil-constitutionnel.fr/les-decisions/referendum-du-28-octobre-1962" target="_blank" class="btn btn-sm btn-outline-secondary">
-                                        <i class="fas fa-external-link-alt me-1"></i>Résultats officiels
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Référendum 1962 (avril) -->
-                <div class="timeline-item" data-aos="fade-left">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="card shadow-sm border-0 border-start border-success border-4">
-                            <div class="card-body p-4">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <span class="badge bg-primary">8 avril 1962</span>
-                                    <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>ADOPTÉ</span>
-                                </div>
-                                <h4 class="card-title mb-3">Accords d'Évian sur l'Algérie</h4>
-                                
-                                <div class="mb-3">
-                                    <p class="mb-1"><strong><i class="fas fa-user-tie me-2"></i>Président :</strong> Charles de Gaulle</p>
-                                    <p class="mb-0"><strong><i class="fas fa-briefcase me-2"></i>Premier ministre :</strong> Michel Debré</p>
-                                </div>
-                                
-                                <p class="card-text text-muted mb-4">
-                                    Les Français ont massivement approuvé les accords d'Évian mettant fin à la guerre d'Algérie et reconnaissant l'indépendance de l'Algérie. Avec 90.81% de "Oui", ce référendum a marqué la fin de la colonisation française en Algérie et ouvert une nouvelle page de l'histoire franco-algérienne.
-                                </p>
-                                
-                                <div class="results-section">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span class="fw-bold text-success"><i class="fas fa-check-circle"></i> Oui: 90.81%</span>
-                                        <span class="fw-bold text-danger"><i class="fas fa-times-circle"></i> Non: 9.19%</span>
-                                    </div>
-                                    <div class="progress" style="height: 40px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 90.81%;" aria-valuenow="90.81" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Oui 90.81%</span>
-                                        </div>
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 9.19%;" aria-valuenow="9.19" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Non 9.19%</span>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3 d-flex justify-content-between text-muted small">
-                                        <span><i class="fas fa-users me-1"></i>Participation: 75.59%</span>
-                                        <span><i class="fas fa-ban me-1"></i>Blancs/Nuls: 2.49%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="mt-3 d-flex gap-2">
-                                    <a href="https://fr.wikipedia.org/wiki/R%C3%A9f%C3%A9rendum_fran%C3%A7ais_sur_les_accords_d%27%C3%89vian" target="_blank" class="btn btn-sm btn-outline-primary">
-                                        <i class="fab fa-wikipedia-w me-1"></i>Wikipedia
-                                    </a>
-                                    <a href="https://www.conseil-constitutionnel.fr/les-decisions/referendum-du-8-avril-1962" target="_blank" class="btn btn-sm btn-outline-secondary">
-                                        <i class="fas fa-external-link-alt me-1"></i>Résultats officiels
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>             
-
-                <!-- Référendum 1961 -->
-                <div class="timeline-item" data-aos="fade-right">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="card shadow-sm border-0 border-start border-success border-4">
-                            <div class="card-body p-4">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <span class="badge bg-primary">8 janvier 1961</span>
-                                    <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>ADOPTÉ</span>
-                                </div>
-                                <h4 class="card-title mb-3">Autodétermination en Algérie</h4>
-                                
-                                <div class="mb-3">
-                                    <p class="mb-1"><strong><i class="fas fa-user-tie me-2"></i>Président :</strong> Charles de Gaulle</p>
-                                    <p class="mb-0"><strong><i class="fas fa-briefcase me-2"></i>Premier ministre :</strong> Michel Debré</p>
-                                </div>
-                                
-                                <p class="card-text text-muted mb-4">
-                                    Les Français ont été consultés sur la politique d'autodétermination en Algérie proposée par le général de Gaulle. Le "Oui" massif (75.26%) a donné mandat au président pour négocier la fin de la guerre d'Algérie, ouvrant la voie aux accords d'Évian l'année suivante.
-                                </p>
-                                
-                                <div class="results-section">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span class="fw-bold text-success"><i class="fas fa-check-circle"></i> Oui: 75.26%</span>
-                                        <span class="fw-bold text-danger"><i class="fas fa-times-circle"></i> Non: 24.74%</span>
-                                    </div>
-                                    <div class="progress" style="height: 40px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 75.26%;" aria-valuenow="75.26" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Oui 75.26%</span>
-                                        </div>
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 24.74%;" aria-valuenow="24.74" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Non 24.74%</span>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3 d-flex justify-content-between text-muted small">
-                                        <span><i class="fas fa-users me-1"></i>Participation: 76.39%</span>
-                                        <span><i class="fas fa-ban me-1"></i>Blancs/Nuls: 6.53%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="mt-3 d-flex gap-2">
-                                    <a href="https://fr.wikipedia.org/wiki/R%C3%A9f%C3%A9rendum_fran%C3%A7ais_de_1961" target="_blank" class="btn btn-sm btn-outline-primary">
-                                        <i class="fab fa-wikipedia-w me-1"></i>Wikipedia
-                                    </a>
-                                    <a href="https://www.conseil-constitutionnel.fr/les-decisions/referendum-du-8-janvier-1961" target="_blank" class="btn btn-sm btn-outline-secondary">
-                                        <i class="fas fa-external-link-alt me-1"></i>Résultats officiels
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Référendum 1958 -->
-                <div class="timeline-item" data-aos="fade-left">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="card shadow-sm border-0 border-start border-success border-4">
-                            <div class="card-body p-4">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <span class="badge bg-primary">28 septembre 1958</span>
-                                    <span class="badge bg-success"><i class="fas fa-check-circle me-1"></i>ADOPTÉ</span>
-                                </div>
-                                <h4 class="card-title mb-3">Constitution de la Ve République</h4>
-                                
-                                <div class="mb-3">
-                                    <p class="mb-1"><strong><i class="fas fa-user-tie me-2"></i>Président :</strong> Charles de Gaulle</p>
-                                    <p class="mb-0"><strong><i class="fas fa-briefcase me-2"></i>Premier ministre :</strong> Charles de Gaulle (Président du Conseil)</p>
-                                </div>
-                                
-                                <p class="card-text text-muted mb-4">
-                                    Premier référendum de la Ve République, il a approuvé la nouvelle Constitution proposée par le général de Gaulle. Avec 82.60% de "Oui", ce vote fondateur a mis fin à l'instabilité de la IVe République et créé un régime présidentiel fort qui perdure encore aujourd'hui.
-                                </p>
-                                
-                                <div class="results-section">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span class="fw-bold text-success"><i class="fas fa-check-circle"></i> Oui: 82.60%</span>
-                                        <span class="fw-bold text-danger"><i class="fas fa-times-circle"></i> Non: 17.40%</span>
-                                    </div>
-                                    <div class="progress" style="height: 40px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 82.60%;" aria-valuenow="82.60" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Oui 82.60%</span>
-                                        </div>
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 17.40%;" aria-valuenow="17.40" aria-valuemin="0" aria-valuemax="100">
-                                            <span class="fw-bold">Non 17.40%</span>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3 d-flex justify-content-between text-muted small">
-                                        <span><i class="fas fa-users me-1"></i>Participation: 84.93%</span>
-                                        <span><i class="fas fa-ban me-1"></i>Blancs/Nuls: 6.72%</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="mt-3 d-flex gap-2">
-                                    <a href="https://fr.wikipedia.org/wiki/R%C3%A9f%C3%A9rendum_fran%C3%A7ais_de_1958" target="_blank" class="btn btn-sm btn-outline-primary">
-                                        <i class="fab fa-wikipedia-w me-1"></i>Wikipedia
-                                    </a>
-                                    <a href="https://www.conseil-constitutionnel.fr/les-decisions/referendum-du-28-septembre-1958" target="_blank" class="btn btn-sm btn-outline-secondary">
-                                        <i class="fas fa-external-link-alt me-1"></i>Résultats officiels
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Statistics Section -->
-    <section class="py-5 bg-white" id="statistiques">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h2 class="section-title mb-3" data-aos="fade-up">
-                        <i class="fas fa-chart-bar me-2"></i>Statistiques
-                    </h2>
-                </div>
-            </div>
-            
-            <div class="row g-4">
-                <div class="col-md-4" data-aos="fade-up">
-                    <div class="card stat-card text-center border-0 shadow-sm h-100">
-                        <div class="card-body p-4">
-                            <div class="stat-icon mb-3">
-                                <i class="fas fa-calendar-check"></i>
-                            </div>
-                            <h3 class="stat-number mb-2" id="totalReferendums">10</h3>
-                            <p class="text-muted mb-0">Référendums sous la Ve République</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card stat-card text-center border-0 shadow-sm h-100">
-                        <div class="card-body p-4">
-                            <div class="stat-icon mb-3">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <h3 class="stat-number mb-2" id="daysSince">7566</h3>
-                            <p class="text-muted mb-0">Jours depuis le dernier</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card stat-card text-center border-0 shadow-sm h-100">
-                        <div class="card-body p-4">
-                            <div class="stat-icon mb-3">
-                                <i class="fas fa-percentage"></i>
-                            </div>
-                            <h3 class="stat-number mb-2">63.9%</h3>
-                            <p class="text-muted mb-0">Participation moyenne</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer bg-dark text-white py-5">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <h5 class="mb-3"><i class="fas fa-info-circle me-2"></i>À propos</h5>
-                    <p class="text-white-50">
-                        Depuis Quand ? est un projet citoyen qui suit le temps écoulé depuis le dernier référendum national en France et documente l'histoire référendaire française.
-                    </p>
-                </div>
-                
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <h5 class="mb-3"><i class="fas fa-link me-2"></i>Liens utiles</h5>
-                    <ul class="list-unstyled footer-links">
-                        <li><a href="https://www.conseil-constitutionnel.fr/" target="_blank"><i class="fas fa-external-link-alt me-2"></i>Conseil Constitutionnel</a></li>
-                        <li><a href="https://www.interieur.gouv.fr/" target="_blank"><i class="fas fa-external-link-alt me-2"></i>Ministère de l'Intérieur</a></li>
-                        <li><a href="https://www.vie-publique.fr/" target="_blank"><i class="fas fa-external-link-alt me-2"></i>Vie Publique</a></li>
-                    </ul>
-                </div>
-                
-                <div class="col-lg-4">
-                    <h5 class="mb-3"><i class="fas fa-share-alt me-2"></i>Réseaux sociaux</h5>
-                    <div class="social-links">
-                        <a href="https://twitter.com/BOTDepuisQuand" target="_blank" class="btn btn-outline-light btn-sm">
-                            <i class="fab fa-twitter"></i> Twitter
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <hr class="my-4 bg-white opacity-25">
-            
-            <div class="row">
-                <div class="col-12 text-center">
-                    <p class="mb-0 text-white-50">
-                        &copy; 2026 DepuisQuand? - Tous droits réservés
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- AOS Animation -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
-    <!-- Custom JS -->
-    <script src="js/script.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
